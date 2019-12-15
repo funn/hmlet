@@ -11,6 +11,7 @@ from .serializers import PhotoSerializer
 
 class PhotoFilter(filters.FilterSet):
     status = filters.CharFilter(method='status_filter')
+    user = filters.UUIDFilter(field_name='uploaded_by__uuid')
 
     def status_filter(self, queryset, name, value):
         return queryset.filter(status=value).filter(uploaded_by=self.request.user)
