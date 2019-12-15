@@ -21,4 +21,4 @@ class Photo(StatusModel, SoftDeletableModel, TimeStampedModel):
     image = models.ImageField(upload_to=get_photo_upload_path, help_text='Actual photo media file path.')
 
     uploaded_by = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='+', help_text='User who uploaded this photo.')
-    captions = models.TextField(null=True, blank=True, help_text='Additional text description for this photo.')
+    captions = models.TextField(default='', blank=True, help_text='Additional text description for this photo.')
