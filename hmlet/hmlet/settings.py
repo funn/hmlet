@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'easy_thumbnails',
 ]
 
 MIDDLEWARE = [
@@ -145,4 +146,10 @@ JWT_AUTH = {
     'JWT_VERIFY_EXPIRATION': False,
     'JWT_PAYLOAD_HANDLER': 'users.utils.jwt_payload_handler',
     'JWT_PAYLOAD_GET_USERNAME_HANDLER': 'users.utils.get_username_from_payload_handler'
+}
+
+THUMBNAIL_ALIASES = {
+    '': {
+        'thumbnail': {'size': (300, 300), 'crop': True},
+    },
 }

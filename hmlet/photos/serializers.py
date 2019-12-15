@@ -7,12 +7,16 @@ from .models import Photo
 
 class PhotoSerializer(serializers.ModelSerializer):
     uploaded_by = serializers.SlugRelatedField(slug_field='uuid', required=False, queryset=get_user_model().objects.all(), help_text='UUID of the user who uploaded the photo.')
-    image = serializers.ImageField(required=False, help_text='Photo image file.')
+    image = serializers.ImageField(required=False, write_only=True, help_text='Photo image file.')
+    thumbnail = serializers.SerializerMethodField(help_text='Photo thumbnail.')
 
     class Meta:
         model = Photo
-        fields = ['uuid', 'uploaded_by', 'status', 'image', 'captions', 'status_changed']
-        read_only_fields = ['uuid', 'uploaded_by']
+        fields = ['uuid', 'thumbnail', 'uploaded_by', 'status', 'image', 'captions', 'status_changed']
+        read_only_fields = ['uuid', 'thumbnail', 'uploaded_by']
+
+    def get_thumbnail(self, obj):
+        return self.context['request'].build_absolute_uri(obj.image['thumbnail'].url)
 
     def validate_image(self, value):
         if self.instance:
