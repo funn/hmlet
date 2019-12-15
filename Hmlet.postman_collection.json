@@ -1,0 +1,420 @@
+{
+	"info": {
+		"_postman_id": "950b8825-7bf6-4652-a782-48635db613ac",
+		"name": "Hmlet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get JWT (user1)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}users/api-token-auth/",
+							"host": [
+								"{{BASE_URL}}users"
+							],
+							"path": [
+								"api-token-auth",
+								""
+							]
+						},
+						"description": "Basic Auth(username:password)"
+					},
+					"response": []
+				},
+				{
+					"name": "Get JWT (user2)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "admin2",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234567",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}users/api-token-auth/",
+							"host": [
+								"{{BASE_URL}}users"
+							],
+							"path": [
+								"api-token-auth",
+								""
+							]
+						},
+						"description": "Basic Auth(username:password)"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Photos",
+			"item": [
+				{
+					"name": "Create a draft photo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{USER_JWT}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/funn/Code/chernobyl/src/product_availability/assets/fda.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}photos/",
+							"host": [
+								"{{BASE_URL}}photos"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish a photo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{USER_JWT}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/funn/Pictures/Screenshot from 2019-09-26 13-56-55.png"
+								},
+								{
+									"key": "status",
+									"value": "published",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}photos/",
+							"host": [
+								"{{BASE_URL}}photos"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Publish a draft photo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{USER_JWT}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "status",
+									"value": "published",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}photos/57727a90-824d-4f5d-8b7a-edc198540713",
+							"host": [
+								"{{BASE_URL}}photos"
+							],
+							"path": [
+								"57727a90-824d-4f5d-8b7a-edc198540713"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit photo captions",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{USER_JWT}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "captions",
+									"value": "Hello there",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}photos/57727a90-824d-4f5d-8b7a-edc198540713",
+							"host": [
+								"{{BASE_URL}}photos"
+							],
+							"path": [
+								"57727a90-824d-4f5d-8b7a-edc198540713"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all photos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{USER_JWT}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}photos",
+							"host": [
+								"{{BASE_URL}}photos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter all photos by user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{USER_JWT}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}photos?user=f880715d-753a-421f-a237-8a19efcf04cb",
+							"host": [
+								"{{BASE_URL}}photos"
+							],
+							"query": [
+								{
+									"key": "user",
+									"value": "f880715d-753a-421f-a237-8a19efcf04cb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List my drafts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "JWT {{USER_JWT}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}photos?status=draft",
+							"host": [
+								"{{BASE_URL}}photos"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "draft"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List my published photos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{USER_JWT}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}photos?status=published",
+							"host": [
+								"{{BASE_URL}}photos"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "published"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List my published photos ASC order",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{USER_JWT}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}photos?status=published&ordering=status_changed",
+							"host": [
+								"{{BASE_URL}}photos"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "published"
+								},
+								{
+									"key": "ordering",
+									"value": "status_changed"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List my published photos DESC order",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{USER_JWT}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}photos?status=published&ordering=-status_changed",
+							"host": [
+								"{{BASE_URL}}photos"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "published"
+								},
+								{
+									"key": "ordering",
+									"value": "-status_changed"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a photo",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "JWT {{USER_JWT}}"
+							}
+						],
+						"url": {
+							"raw": "{{BASE_URL}}photos/57727a90-824d-4f5d-8b7a-edc198540713",
+							"host": [
+								"{{BASE_URL}}photos"
+							],
+							"path": [
+								"57727a90-824d-4f5d-8b7a-edc198540713"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
