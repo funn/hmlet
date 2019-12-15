@@ -132,8 +132,14 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'users.authentication.HmletJSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
         'rest_framework.authentication.BasicAuthentication',
     ),
+}
+
+JWT_AUTH = {
+    'JWT_VERIFY_EXPIRATION': False,
+    'JWT_PAYLOAD_HANDLER': 'users.utils.jwt_payload_handler',
+    'JWT_PAYLOAD_GET_USERNAME_HANDLER': 'users.utils.get_username_from_payload_handler'
 }
